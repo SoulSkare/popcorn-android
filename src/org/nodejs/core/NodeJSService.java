@@ -24,13 +24,13 @@ public class NodeJSService extends Service {
 
 	private static final String TAG = "nodejs-service";
 	private static final String NODEJS_PATH = "backend";
-	private static final String DEFAULT_PACKAGE = "backend.zip";
+	private static final String DEFAULT_PACKAGE = "app.zip";
 	
 	private String mPackageName = DEFAULT_PACKAGE;
 	private NodeJSTask mTask = null;
 
 	private class NodeJSTask extends AsyncTask<String, Void, String> {
-		boolean install=false;
+		boolean install = false;
 		Context mContext = null;
 		boolean running = false;
 
@@ -47,22 +47,24 @@ public class NodeJSService extends Service {
 
 			File appPath = mContext.getDir(NODEJS_PATH, Context.MODE_PRIVATE);
 
-			if (!appPath.exists()) {
-				appPath.mkdirs();
-				try {
-					installPackage(assets, mPackageName, appPath);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					Log.e(TAG, "Error while installing script", e);
-				}
-
-			}
-
+			
+			
 			
 			String mainJS = params[0];
 			File js = new File(appPath, NODEJS_PATH + "/" + "src" + "/" + "app" + "/" + mainJS);
-
+			if (!js.exists()) {
+				try {
+					installPackage(assets, mPackageName, appPath);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						Log.e(TAG, "Error while installing script", e);
+					}
+				
+				
+				
+					}
 			return js.toString();
+			
 		}
 
 		@Override
@@ -91,6 +93,7 @@ public class NodeJSService extends Service {
 		}
 
 		if (files.length == 0) {
+			
 			// basePath is a file. Copy file
 			Log.d(TAG, "copy file: " + basePath);
 			File targetFile = new File(targetDir, basePath);
@@ -125,43 +128,43 @@ public class NodeJSService extends Service {
 	}
 	
 	public static void installPackage(AssetManager assets, String packageName, File targetDir) throws IOException {
-		boolean install = false;
+		
 		if (!targetDir.exists()) {
 			targetDir.mkdirs();
-			ZipInputStream zin = new ZipInputStream(assets.open(packageName));
 			
-			ZipEntry ze = null;
-			
-			try {
-				while((ze = zin.getNextEntry()) != null) {
-					if(ze.isDirectory()) {
-						File path = new File(targetDir, ze.getName());
-						
-						path.mkdirs();
-					} else {
-						File path = new File(targetDir, ze.getName());
-						FileOutputStream out = new FileOutputStream(path);
-						
-						Log.d(TAG, "extract " + ze.getName() + " to " + path);
-						
-						byte[] buf = new byte[4096];
-						int len;
-						
-						while((len = zin.read(buf)) != -1) {
-							out.write(buf, 0, len);
-						}
-						
-						out.flush();
-						out.close();
-					}
-				}
-			} finally {		
-				zin.close();
-			}
-
 			
 		}
+		ZipInputStream zin = new ZipInputStream(assets.open(packageName));
 		
+		ZipEntry ze = null;
+		
+		try {
+			while((ze = zin.getNextEntry()) != null) {
+				if(ze.isDirectory()) {
+					File path = new File(targetDir, ze.getName());
+					
+					path.mkdirs();
+				} else {
+					File path = new File(targetDir, ze.getName());
+					FileOutputStream out = new FileOutputStream(path);
+					
+					Log.d(TAG, "extract " + ze.getName() + " to " + path);
+					
+					byte[] buf = new byte[4096];
+					int len;
+					
+					while((len = zin.read(buf)) != -1) {
+						out.write(buf, 0, len);
+					}
+					
+					out.flush();
+					out.close();
+				}
+			}
+		} finally {		
+			zin.close();
+		}
+
 		
 		
 				} 
