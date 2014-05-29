@@ -129,7 +129,9 @@ public class NodeJSService extends Service {
 			targetDir.mkdirs();
 			install = true;
 		}
-		
+		if (targetDir.exists()) {
+			
+			install = true;
 		if(install) {
 		
 		
@@ -163,6 +165,7 @@ public class NodeJSService extends Service {
 		} finally {		
 			zin.close();
 		}
+		} 
 		}
 	}
 
