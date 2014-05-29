@@ -49,20 +49,15 @@ public class NodeJSService extends Service {
 
 			if (!appPath.exists()) {
 				appPath.mkdirs();
-				try {
-					//installScripts(assets, appPath, NODEJS_PATH);
-					
-						installPackage(assets, mPackageName, appPath);
-					
-					
-				} catch (IOException e) {
-					Log.e(TAG, "Error while installing script", e);
-					return null;
-				}
 
 			}
 
-	
+			try {
+				installPackage(assets, mPackageName, appPath);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				Log.e(TAG, "Error while installing script", e);
+			}
 			String mainJS = params[0];
 			File js = new File(appPath, NODEJS_PATH + "/" + "src" + "/" + "app" + "/" + mainJS);
 
@@ -91,6 +86,7 @@ public class NodeJSService extends Service {
 
 		if (!targetDir.exists()) {
 			targetDir.mkdirs();
+			
 		}
 
 		if (files.length == 0) {
@@ -128,9 +124,14 @@ public class NodeJSService extends Service {
 	}
 	
 	public static void installPackage(AssetManager assets, String packageName, File targetDir) throws IOException {
+		boolean install = false;
 		if (!targetDir.exists()) {
 			targetDir.mkdirs();
+			install = true;
 		}
+		
+		if(install) {
+		
 		
 		ZipInputStream zin = new ZipInputStream(assets.open(packageName));
 		
@@ -161,6 +162,7 @@ public class NodeJSService extends Service {
 			}
 		} finally {		
 			zin.close();
+		}
 		}
 	}
 
