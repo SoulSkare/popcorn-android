@@ -24,7 +24,7 @@ public class NodeJSService extends Service {
 
 	private static final String TAG = "nodejs-service";
 	private static final String NODEJS_PATH = "backend";
-	private static final String DEFAULT_PACKAGE = "app.zip";
+	private static final String DEFAULT_PACKAGE = "backend.zip";
 	
 	private String mPackageName = DEFAULT_PACKAGE;
 	private NodeJSTask mTask = null;
