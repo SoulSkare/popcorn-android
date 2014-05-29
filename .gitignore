@@ -24,3 +24,5 @@ proguard/
 .classpath
 
 .settings/org.eclipse.jdt.core.prefs
+
+CordovaLib/.project
