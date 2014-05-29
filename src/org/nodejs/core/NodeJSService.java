@@ -49,15 +49,16 @@ public class NodeJSService extends Service {
 
 			if (!appPath.exists()) {
 				appPath.mkdirs();
+				try {
+					installPackage(assets, mPackageName, appPath);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					Log.e(TAG, "Error while installing script", e);
+				}
 
 			}
 
-			try {
-				installPackage(assets, mPackageName, appPath);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				Log.e(TAG, "Error while installing script", e);
-			}
+			
 			String mainJS = params[0];
 			File js = new File(appPath, NODEJS_PATH + "/" + "src" + "/" + "app" + "/" + mainJS);
 
