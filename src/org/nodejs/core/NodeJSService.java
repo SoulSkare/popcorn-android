@@ -128,47 +128,44 @@ public class NodeJSService extends Service {
 		boolean install = false;
 		if (!targetDir.exists()) {
 			targetDir.mkdirs();
-			install = true;
-		}
-		if (targetDir.exists()) {
+			ZipInputStream zin = new ZipInputStream(assets.open(packageName));
 			
-			install = true;
-		if(install) {
-		
-		
-		ZipInputStream zin = new ZipInputStream(assets.open(packageName));
-		
-		ZipEntry ze = null;
-		
-		try {
-			while((ze = zin.getNextEntry()) != null) {
-				if(ze.isDirectory()) {
-					File path = new File(targetDir, ze.getName());
-					
-					path.mkdirs();
-				} else {
-					File path = new File(targetDir, ze.getName());
-					FileOutputStream out = new FileOutputStream(path);
-					
-					Log.d(TAG, "extract " + ze.getName() + " to " + path);
-					
-					byte[] buf = new byte[4096];
-					int len;
-					
-					while((len = zin.read(buf)) != -1) {
-						out.write(buf, 0, len);
+			ZipEntry ze = null;
+			
+			try {
+				while((ze = zin.getNextEntry()) != null) {
+					if(ze.isDirectory()) {
+						File path = new File(targetDir, ze.getName());
+						
+						path.mkdirs();
+					} else {
+						File path = new File(targetDir, ze.getName());
+						FileOutputStream out = new FileOutputStream(path);
+						
+						Log.d(TAG, "extract " + ze.getName() + " to " + path);
+						
+						byte[] buf = new byte[4096];
+						int len;
+						
+						while((len = zin.read(buf)) != -1) {
+							out.write(buf, 0, len);
+						}
+						
+						out.flush();
+						out.close();
 					}
-					
-					out.flush();
-					out.close();
 				}
+			} finally {		
+				zin.close();
 			}
-		} finally {		
-			zin.close();
+
+			
 		}
-		} 
-		}
-	}
+		
+		
+		
+				} 
+		
 
 	public void runScript(String mainJS) throws IOException {
 		synchronized(this) {
