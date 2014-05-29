@@ -30,7 +30,7 @@ public class NodeJSService extends Service {
 	private NodeJSTask mTask = null;
 
 	private class NodeJSTask extends AsyncTask<String, Void, String> {
-
+		boolean install=false;
 		Context mContext = null;
 		boolean running = false;
 
@@ -46,25 +46,23 @@ public class NodeJSService extends Service {
 			AssetManager assets = mContext.getAssets();
 
 			File appPath = mContext.getDir(NODEJS_PATH, Context.MODE_PRIVATE);
-                        boolean shouldInstall = false;
 
 			if (!appPath.exists()) {
 				appPath.mkdirs();
-                                shouldInstall = true;
+				try {
+					//installScripts(assets, appPath, NODEJS_PATH);
+					
+						installPackage(assets, mPackageName, appPath);
+					
+					
+				} catch (IOException e) {
+					Log.e(TAG, "Error while installing script", e);
+					return null;
+				}
+
 			}
 
-			try {
-				//installScripts(assets, appPath, NODEJS_PATH);
-				if(shouldInstall) {
-					  installPackage(assets, mPackageName, appPath);
-					} else {
-					  Log.e(TAG, "SKIPPING PACKAGE INSTALL");
-					}
-			} catch (IOException e) {
-				Log.e(TAG, "Error while installing script", e);
-				return null;
-			}
-
+	
 			String mainJS = params[0];
 			File js = new File(appPath, NODEJS_PATH + "/" + "src" + "/" + "app" + "/" + mainJS);
 
