@@ -187,6 +187,13 @@ public class NodeJSService extends Service {
 		return null;
 	}
 
+	 @Override
+	    public void onDestroy() {
+		 NodeJSService.this.stopSelf();
+		 Intent intent = new Intent(this, NodeJSService.class);
+		 stopService(intent);
+	 }
+	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		PackageManager pm = getPackageManager();

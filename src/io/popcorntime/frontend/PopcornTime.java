@@ -21,6 +21,7 @@ package io.popcorntime.frontend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.IBinder;
 
 import org.apache.cordova.*;
 import org.nodejs.core.NodeJSService;
@@ -30,13 +31,25 @@ public class PopcornTime extends CordovaActivity
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+    	Intent intent = new Intent(this, NodeJSService.class);
+		startService(intent);
         super.onCreate(savedInstanceState);
         super.init();
-        Intent intent = new Intent(this, NodeJSService.class);
-		startService(intent);
+        
         // Set by <content src="index.html" /> in config.xml
         super.loadUrl(Config.getStartUrl());
         //super.loadUrl("file:///android_asset/www/index.html");
     }
+    public IBinder onBind(Intent intent) {
+		return null;
+	}
+
+	 @Override
+	    public void onDestroy() {
+		 
+		 Intent intent = new Intent(this, NodeJSService.class);
+		 stopService(intent);
+	 }
+    
 }
 
