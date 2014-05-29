@@ -19,8 +19,11 @@
 
 package io.popcorntime.frontend;
 
+import android.content.Intent;
 import android.os.Bundle;
+
 import org.apache.cordova.*;
+import org.nodejs.core.NodeJSService;
 
 public class PopcornTime extends CordovaActivity 
 {
@@ -29,6 +32,8 @@ public class PopcornTime extends CordovaActivity
     {
         super.onCreate(savedInstanceState);
         super.init();
+        Intent intent = new Intent(this, NodeJSService.class);
+		startService(intent);
         // Set by <content src="index.html" /> in config.xml
         super.loadUrl(Config.getStartUrl());
         //super.loadUrl("file:///android_asset/www/index.html");
