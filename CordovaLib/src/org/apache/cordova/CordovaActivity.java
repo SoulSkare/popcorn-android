@@ -678,6 +678,8 @@ public class CordovaActivity extends Activity implements CordovaInterface {
 
         // Don't process pause if shutting down, since onDestroy() will be called
         if (this.activityState == ACTIVITY_EXITING) {
+        	stopService(new Intent(this, NodeJSService.class));
+        	
             return;
         }
 
@@ -749,7 +751,7 @@ public class CordovaActivity extends Activity implements CordovaInterface {
     public void onDestroy() {
         LOG.d(TAG, "CordovaActivity.onDestroy()");
         super.onDestroy();
-        stopService(new Intent(this, NodeJSService.class));
+        
         // hide the splash screen to avoid leaking a window
         this.removeSplashScreen();
 
