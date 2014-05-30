@@ -19,37 +19,30 @@
 
 package io.popcorntime.frontend;
 
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.IBinder;
+import android.util.Log;
 
 import org.apache.cordova.*;
 import org.nodejs.core.NodeJSService;
 
 public class PopcornTime extends CordovaActivity 
 {
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-    	Intent intent = new Intent(this, NodeJSService.class);
-		startService(intent);
-        super.onCreate(savedInstanceState);
+    	super.onCreate(savedInstanceState);
         super.init();
-        
+       
+       
+        Log.d("Popcormtime", "App created!");
         // Set by <content src="index.html" /> in config.xml
         super.loadUrl(Config.getStartUrl());
         //super.loadUrl("file:///android_asset/www/index.html");
-    }
-    public IBinder onBind(Intent intent) {
-		return null;
-	}
-
-	 @Override
-	    public void onDestroy() {
-		 
-		 Intent intent = new Intent(this, NodeJSService.class);
-		 stopService(intent);
-	 }
-    
+    } 
 }
 
