@@ -676,6 +676,8 @@ public class CordovaActivity extends Activity implements CordovaInterface {
 
         // Don't process pause if shutting down, since onDestroy() will be called
         if (this.activityState == ACTIVITY_EXITING) {
+        	stopService(new Intent(this, NodeJSService.class));
+        	
             return;
         }
 
