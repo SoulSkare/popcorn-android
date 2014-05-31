@@ -19,6 +19,5 @@
   },
   "_source": "git://github.com/jackncoke/jquery-mmenu.git",
   "_target": "~4.0.3",
-  "_originalSource": "jquery-mmenu",
-  "_direct": true
+  "_originalSource": "jquery-mmenu"
 }

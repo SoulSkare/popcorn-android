@@ -28,7 +28,6 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.LOG;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.nodejs.core.NodeJSService;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -215,7 +214,6 @@ public class CordovaActivity extends Activity implements CordovaInterface {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Config.init(this);
-        startService(new Intent(this, NodeJSService.class));
         LOG.d(TAG, "CordovaActivity.onCreate()");
         super.onCreate(savedInstanceState);
 
@@ -749,7 +747,7 @@ public class CordovaActivity extends Activity implements CordovaInterface {
     public void onDestroy() {
         LOG.d(TAG, "CordovaActivity.onDestroy()");
         super.onDestroy();
-        stopService(new Intent(this, NodeJSService.class));
+
         // hide the splash screen to avoid leaking a window
         this.removeSplashScreen();
 

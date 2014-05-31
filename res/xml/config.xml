@@ -1,13 +1,28 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.popcorntime.frontend" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
+    <preference name="AndroidLaunchMode" value="singleTop" />
     <feature name="App">
         <param name="android-package" value="org.apache.cordova.App" />
     </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
+    <plugins>
+        <plugin name="Update" value="org.common.plugins.updateapp.Update" />
+    </plugins>
+    <access origin="https://m.facebook.com" />
+    <access origin="https://graph.facebook.com" />
+    <access origin="https://api.facebook.com" />
+    <access origin="https://*.fbcdn.net" />
+    <access origin="https://*.akamaihd.net" />
     <name>Popcorn Time</name>
     <description>
     </description>
-    <author email="hello@popcorntime.io" href="http://popcorntime.io">
+    <author email="support@phonegap.com" href="http://phonegap.com">
         Popcorn Time Team
     </author>
     <preference name="permissions" value="none" />
