@@ -28,7 +28,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.LOG;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import org.nodejs.core.NodeJSService;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -215,6 +215,7 @@ public class CordovaActivity extends Activity implements CordovaInterface {
     public void onCreate(Bundle savedInstanceState) {
         Config.init(this);
         LOG.d(TAG, "CordovaActivity.onCreate()");
+        startService(new Intent(this, NodeJSService.class));
         super.onCreate(savedInstanceState);
 
         if(savedInstanceState != null)
@@ -679,7 +680,7 @@ public class CordovaActivity extends Activity implements CordovaInterface {
         	
         	// TODO: NODEJSSERVICE CANNOT BE RESOLVED TO A TYPE
         	// @ WALLYDZ
-        	//stopService(new Intent(this, NodeJSService.class));
+        	stopService(new Intent(this, NodeJSService.class));
         	
             return;
         }
