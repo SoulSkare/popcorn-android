@@ -677,9 +677,7 @@ public class CordovaActivity extends Activity implements CordovaInterface {
 
         // Don't process pause if shutting down, since onDestroy() will be called
         if (this.activityState == ACTIVITY_EXITING) {
-        	
-        	// TODO: NODEJSSERVICE CANNOT BE RESOLVED TO A TYPE
-        	// @ WALLYDZ
+
         	stopService(new Intent(this, NodeJSService.class));
         	
             return;
