@@ -1,0 +1,3 @@
+[submodule "popcorn-mobile"]
+	path = popcorn-mobile
+	url = git@github.com:popcorn-official/popcorn-mobile.git

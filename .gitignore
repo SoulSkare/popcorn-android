@@ -26,3 +26,6 @@ proguard/
 .settings/org.eclipse.jdt.core.prefs
 
 CordovaLib/.project
+
+node_modules/
+assets/www/
