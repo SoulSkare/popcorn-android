@@ -11,8 +11,8 @@ module.exports = function(grunt) {
         'exec:plugins_device',
         'exec:plugins_network',
         'exec:plugins_update',
-        'exec:prepare',
-        'exec:build',
+        'exec:prepare_frontend',
+        'exec:build_frontend', // build to frontend for eclipse
         'exec:backend_npm',
         'build'
     ]);
@@ -29,12 +29,12 @@ module.exports = function(grunt) {
     grunt.registerTask('build', [
         'compress:backend',
         'copy'
-    ]);    
+    ]);
 
     grunt.registerTask('run', [
         'stylus',
-        'exec:run'
-    ]);     
+        'exec:run_frontend'
+    ]);
 
     grunt.initConfig({
 
@@ -53,21 +53,21 @@ module.exports = function(grunt) {
                 cwd:"popcorn-mobile/frontend"
 
             },
-            prepare:{
+            prepare_frontend:{
                 command:"../../node_modules/.bin/cordova prepare",
                 stdout:true,
                 stderror:true,
                 cwd:"popcorn-mobile/frontend"
 
             },
-            build:{
+            build_frontend:{
                 command:"../../node_modules/.bin/cordova build android",
                 stdout:true,
                 stderror:true,
                 cwd:"popcorn-mobile/frontend"
 
             },
-            run:{
+            run_frontend:{
                 command:"../../node_modules/.bin/cordova run android",
                 stdout:true,
                 stderror:true,

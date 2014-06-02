@@ -28,6 +28,7 @@ proguard/
 CordovaLib/.project
 
 node_modules/
-app/assets/www/
-app/res/xml/config.xml
-app/assets/backend.zip
+eclipse-project/assets/www/
+eclipse-project/res/xml/config.xml
+eclipse-project/assets/backend.zip
+eclipse-project/assets/backend.zip
