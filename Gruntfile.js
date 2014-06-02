@@ -129,19 +129,19 @@ module.exports = function(grunt) {
           main: {
             files: [
               //copy xml for plugins and project config
-              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/res/xml/', src: ['*.xml'], dest: 'res/xml/'},
+              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/res/xml/', src: ['*.xml'], dest: 'app/res/xml/'},
               // copy assets
-              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/assets/www/', src: ['**'], dest: 'assets/www/'},
+              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/assets/www/', src: ['**'], dest: 'app/assets/www/'},
               // copy plugins
-              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/src/org/', src: ['**'], dest: 'src/org/'}
+              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/src/org/', src: ['**'], dest: 'app/src/org/'}
             ]
           }
         },
 
         clean: {
           plugins: ["popcorn-mobile/frontend/plugins/*", "!popcorn-mobile/frontend/plugins/.gitkeep"],
-          assets_www: ["assets/www/*", "!popcorn-mobile/frontend/plugins/.gitkeep"],
-          assets_backend: ["assets/*.zip"]
+          assets_www: ["app/assets/www/*", "!app/assets/www/.gitkeep"],
+          assets_backend: ["app/assets/*.zip"]
         },
 
         update_submodules: {
@@ -153,7 +153,7 @@ module.exports = function(grunt) {
         compress: {
           backend: {
             options: {
-              archive: 'assets/backend.zip'
+              archive: 'app/assets/backend.zip'
             },
             files: [
               {expand: true, cwd: 'popcorn-mobile/backend/', src: ['**'], dest: 'backend/'},

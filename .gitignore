@@ -28,6 +28,6 @@ proguard/
 CordovaLib/.project
 
 node_modules/
-assets/www/
-res/xml/config.xml
-assets/backend.zip
+app/assets/www/
+app/res/xml/config.xml
+app/assets/backend.zip
