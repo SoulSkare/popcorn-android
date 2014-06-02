@@ -18,6 +18,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('update', [
+        'exec:submodules',
         'exec:rmPlatform',
         'clean:plugins',
         'clean:assets_www',
@@ -105,7 +106,9 @@ module.exports = function(grunt) {
             backend_npm: {
                 command:'npm install',
                 cwd:"popcorn-mobile/backend"
-            }            
+            },
+
+            submodules:'git submodule foreach git pull origin master'     
         },
 
         stylus: {
