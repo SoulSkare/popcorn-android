@@ -34,15 +34,15 @@ import android.widget.Toast;
 
 public class PopcornTime extends CordovaActivity 
 {
-	 boolean mBounded;
-	 NodeJSService mServer;
+   boolean mBounded;
+   NodeJSService mServer;
 
-	 
+   
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-    	super.onCreate(savedInstanceState);
+      super.onCreate(savedInstanceState);
     
         super.init();
         Intent mIntent = new Intent(this, NodeJSService.class);
@@ -57,19 +57,18 @@ public class PopcornTime extends CordovaActivity
         //super.loadUrl("file:///android_asset/www/index.html");
     } 
     ServiceConnection mConnection = new ServiceConnection() {
-    	  
-    	  public void onServiceDisconnected(ComponentName name) {
-    	   Toast.makeText(PopcornTime.this, "Service is disconnected", 1000).show();
-    	   mBounded = false;
-    	   mServer = null;
-    	  }
-    	  
-    	  public void onServiceConnected(ComponentName name, IBinder service) {
-    	   Toast.makeText(PopcornTime.this, "Service is connected", 1000).show();
-    	   mBounded = true;
-    	   LocalBinder mLocalBinder = (LocalBinder)service;
-    	   mServer = mLocalBinder.getActivity();
-    	  }
-    	 };
+        
+        public void onServiceDisconnected(ComponentName name) {
+         Toast.makeText(PopcornTime.this, "Service is disconnected", 1000).show();
+         mBounded = false;
+         mServer = null;
+        }
+        
+        public void onServiceConnected(ComponentName name, IBinder service) {
+         Toast.makeText(PopcornTime.this, "Service is connected", 1000).show();
+         mBounded = true;
+         LocalBinder mLocalBinder = (LocalBinder)service;
+         mServer = mLocalBinder.getActivity();
+        }
+       };
 }
-
