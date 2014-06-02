@@ -28,7 +28,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.LOG;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.nodejs.core.NodeJSService;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -37,6 +37,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -91,6 +92,7 @@ import android.widget.LinearLayout;
 public class CordovaActivity extends Activity implements CordovaInterface {
     public static String TAG = "CordovaActivity";
 
+    
     // The webview for our app
     protected CordovaWebView appView;
     protected CordovaWebViewClient webViewClient;
@@ -215,9 +217,10 @@ public class CordovaActivity extends Activity implements CordovaInterface {
     public void onCreate(Bundle savedInstanceState) {
         Config.init(this);
         LOG.d(TAG, "CordovaActivity.onCreate()");
-        startService(new Intent(this, NodeJSService.class));
+        
         super.onCreate(savedInstanceState);
 
+ 
         if(savedInstanceState != null)
         {
             initCallbackClass = savedInstanceState.getString("callbackClass");
@@ -678,7 +681,7 @@ public class CordovaActivity extends Activity implements CordovaInterface {
         // Don't process pause if shutting down, since onDestroy() will be called
         if (this.activityState == ACTIVITY_EXITING) {
 
-        	stopService(new Intent(this, NodeJSService.class));
+        	
         	
             return;
         }

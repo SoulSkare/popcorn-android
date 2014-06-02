@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.zip.ZipEntry;
@@ -18,12 +20,14 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ServiceInfo;
 import android.content.res.AssetManager;
 import android.os.AsyncTask;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
 public class NodeJSService extends Service {
 	ScheduledExecutorService scheduler;
+	IBinder mBinder = new LocalBinder();
 	private static final String TAG = "nodejs-service";
 	private static final String NODEJS_PATH = "backend";
 	private static final String DEFAULT_PACKAGE = "backend.zip";
@@ -186,8 +190,19 @@ public class NodeJSService extends Service {
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		return null;
+		  return mBinder;
 	}
+	public class LocalBinder extends Binder {
+		  public NodeJSService getActivity() {
+		   return NodeJSService.this;
+		  }
+		 }
+
+		 public String getTime() {
+		  SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		  return mDateFormat.format(new Date());
+		 }
+		
 
 	
 	@Override
@@ -228,4 +243,5 @@ public class NodeJSService extends Service {
 
 		return START_STICKY;
 	}
+	
 }
