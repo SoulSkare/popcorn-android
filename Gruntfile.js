@@ -13,10 +13,11 @@ module.exports = function(grunt) {
         'exec:plugins_update',
         'exec:prepare',
         'exec:build',
+        'exec:backend_npm',
         'compress:backend'
     ]);
 
-    grunt.registerTask('fix', [
+    grunt.registerTask('update', [
         'exec:rmPlatform',
         'clean:plugins',
         'clean:assets_www',
