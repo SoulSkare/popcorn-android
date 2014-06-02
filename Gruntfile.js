@@ -12,12 +12,15 @@ module.exports = function(grunt) {
         'exec:plugins_network',
         'exec:plugins_update',
         'exec:prepare',
-        'exec:build'
+        'exec:build',
+        'compress:backend'
     ]);
 
     grunt.registerTask('fix', [
         'exec:rmPlatform',
         'clean:plugins',
+        'clean:assets_www',
+        'clean:assets_backend',
         'default'
     ]);
 
@@ -97,6 +100,11 @@ module.exports = function(grunt) {
                 command:'../../node_modules/.bin/bower install',
                 cwd:"popcorn-mobile/frontend"
             },
+
+            backend_npm: {
+                command:'npm install',
+                cwd:"popcorn-mobile/backend"
+            }            
         },
 
         stylus: {
@@ -127,14 +135,27 @@ module.exports = function(grunt) {
         },
 
         clean: {
-          plugins: ["popcorn-mobile/frontend/plugins/*", "!popcorn-mobile/frontend/plugins/.gitkeep"]
+          plugins: ["popcorn-mobile/frontend/plugins/*", "!popcorn-mobile/frontend/plugins/.gitkeep"],
+          assets_www: ["assets/www/*", "!popcorn-mobile/frontend/plugins/.gitkeep"],
+          assets_backend: ["assets/*.zip"]
         },
 
         update_submodules: {
             default: {
                 options: {}
             }
-        }      
+        },
+
+        compress: {
+          backend: {
+            options: {
+              archive: 'assets/backend.zip'
+            },
+            files: [
+              {expand: true, cwd: 'popcorn-mobile/backend/', src: ['**'], dest: 'backend/'},
+            ]
+          }
+        }  
 
     });
 
