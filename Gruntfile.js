@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         'exec:prepare',
         'exec:build',
         'exec:backend_npm',
-        'compress:backend'
+        'build'
     ]);
 
     grunt.registerTask('update', [
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('build', [
-        'fix',
+        'compress:backend',
         'copy'
     ]);    
 
