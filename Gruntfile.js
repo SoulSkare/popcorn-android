@@ -116,9 +116,12 @@ module.exports = function(grunt) {
         copy: {
           main: {
             files: [
+              //copy xml for plugins and project config
               {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/res/xml/', src: ['*.xml'], dest: 'res/xml/'},
+              // copy assets
               {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/assets/www/', src: ['**'], dest: 'assets/www/'},
-              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/src/', src: ['**'], dest: 'src/'}
+              // copy plugins
+              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/src/org/', src: ['**'], dest: 'src/org/'}
             ]
           }
         },
