@@ -4,6 +4,7 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.registerTask('default', [
+        'update_submodules',
         'stylus',
         'exec:bower',
         'exec:addPlatform',
@@ -19,6 +20,11 @@ module.exports = function(grunt) {
         'clean:plugins',
         'default'
     ]);
+
+    grunt.registerTask('build', [
+        'fix',
+        'copy'
+    ]);    
 
     grunt.registerTask('run', [
         'stylus',
@@ -110,14 +116,22 @@ module.exports = function(grunt) {
         copy: {
           main: {
             files: [
-              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/assets/www/', src: ['**'], dest: 'assets/www/'}
+              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/res/xml/', src: ['*.xml'], dest: 'res/xml/'},
+              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/assets/www/', src: ['**'], dest: 'assets/www/'},
+              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/src/', src: ['**'], dest: 'src/'}
             ]
           }
         },
 
         clean: {
           plugins: ["popcorn-mobile/frontend/plugins/*", "!popcorn-mobile/frontend/plugins/.gitkeep"]
-        }
+        },
+
+        update_submodules: {
+            default: {
+                options: {}
+            }
+        }      
 
     });
 
