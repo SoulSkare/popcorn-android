@@ -11,6 +11,7 @@ module.exports = function(grunt) {
         'exec:plugins_device',
         'exec:plugins_network',
         'exec:plugins_update',
+        'exec:plugins_ssl',
         'exec:prepare_frontend',
         'exec:build_frontend', // build to frontend for eclipse
         'exec:backend_npm',
@@ -98,6 +99,11 @@ module.exports = function(grunt) {
                 cwd:"popcorn-mobile/frontend"
             },
 
+            plugins_ssl: {
+                command:'../../node_modules/.bin/cordova plugin add https://github.com/phenomenz/codova-ssl-plugin.git',
+                cwd:"popcorn-mobile/frontend"
+            },
+
             bower: {
                 command:'../../node_modules/.bin/bower install',
                 cwd:"popcorn-mobile/frontend"
@@ -133,7 +139,8 @@ module.exports = function(grunt) {
               // copy assets
               {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/assets/www/', src: ['**'], dest: 'eclipse-project/assets/www/'},
               // copy plugins
-              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/src/org/', src: ['**'], dest: 'eclipse-project/src/org/'}
+              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/src/org/', src: ['**'], dest: 'eclipse-project/src/org/'},
+              {expand: true, cwd: 'popcorn-mobile/frontend/platforms/android/src/nl/', src: ['**'], dest: 'eclipse-project/src/nl/'}
             ]
           }
         },
