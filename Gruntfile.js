@@ -2,6 +2,7 @@ module.exports = function(grunt) {
     "use strict";
 
     require('load-grunt-tasks')(grunt);
+    var path = require('path');
 
     grunt.registerTask('default', [
         'update_submodules',
@@ -42,34 +43,34 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         exec:{
             addPlatform:{
-                command:"../../node_modules/.bin/cordova platforms add android",
+                command:path.join('..', '..', 'node_modules', '.bin', 'cordova') + " platforms add android",
                 stdout:true,
                 stderror:true,
                 cwd:"popcorn-mobile/frontend"
             },
             rmPlatform:{
-                command:"../../node_modules/.bin/cordova platforms rm android",
+                command:path.join('..', '..', 'node_modules', '.bin', 'cordova') + " platforms rm android",
                 stdout:true,
                 stderror:true,
                 cwd:"popcorn-mobile/frontend"
 
             },
             prepare_frontend:{
-                command:"../../node_modules/.bin/cordova prepare",
+                command:path.join('..', '..', 'node_modules', '.bin', 'cordova') + " prepare",
                 stdout:true,
                 stderror:true,
                 cwd:"popcorn-mobile/frontend"
 
             },
             build_frontend:{
-                command:"../../node_modules/.bin/cordova build android",
+                command:path.join('..', '..', 'node_modules', '.bin', 'cordova') + " build android",
                 stdout:true,
                 stderror:true,
                 cwd:"popcorn-mobile/frontend"
 
             },
             run_frontend:{
-                command:"../../node_modules/.bin/cordova run android",
+                command:path.join('..', '..', 'node_modules', '.bin', 'cordova') + " run android",
                 stdout:true,
                 stderror:true,
                 cwd:"popcorn-mobile/frontend"
@@ -77,7 +78,7 @@ module.exports = function(grunt) {
             },
 
             serve:{
-                command:"../../node_modules/.bin/phonegap serve",
+                command:path.join('..', '..', 'node_modules', '.bin', 'phonegap') + " serve",
                 stdout:true,
                 stderror:true,
                 cwd:"popcorn-mobile/frontend"
@@ -85,27 +86,27 @@ module.exports = function(grunt) {
             },   
 
             plugins_device: {
-                command:'../../node_modules/.bin/cordova plugin add org.apache.cordova.device',
+                command:path.join('..', '..', 'node_modules', '.bin', 'cordova') + " plugin add org.apache.cordova.device",
                 cwd:"popcorn-mobile/frontend"
             },
 
             plugins_network: {
-                command:'../../node_modules/.bin/cordova plugin add org.apache.cordova.network-information',
+                command:path.join('..', '..', 'node_modules', '.bin', 'cordova') + " plugin add org.apache.cordova.network-information",
                 cwd:"popcorn-mobile/frontend"
             },
 
             plugins_update: {
-                command:'../../node_modules/.bin/cordova plugin add https://github.com/popcorn-official/codova-update-plugin.git',
+                command:path.join('..', '..', 'node_modules', '.bin', 'cordova') + " plugin add https://github.com/popcorn-official/codova-update-plugin.git",
                 cwd:"popcorn-mobile/frontend"
             },
 
             plugins_ssl: {
-                command:'../../node_modules/.bin/cordova plugin add https://github.com/phenomenz/codova-ssl-plugin.git',
+                command:path.join('..', '..', 'node_modules', '.bin', 'cordova') + " plugin add https://github.com/phenomenz/codova-ssl-plugin.git",
                 cwd:"popcorn-mobile/frontend"
             },
 
             bower: {
-                command:'../../node_modules/.bin/bower install',
+                command:path.join('..', '..', 'node_modules', '.bin', 'bower') + " install",
                 cwd:"popcorn-mobile/frontend"
             },
 
